@@ -18,6 +18,12 @@
         public DateTime CreatedOn { get; private set; }
         public DateTime? UpdatedOn { get; set; }
 
+        public Guid OwnerId { get; set; }
+        public User Owner { get; set; }
+
+        public int? ParentInfoNodeId { get; set; }
+        public InfoNode ParentInfoNode { get; set; }
+
         public ICollection<InfoNode> ChildInfoNodes { get; set; }
         public ICollection<TimeSeriesNode> TimeSeriesNodes { get; set; }
 

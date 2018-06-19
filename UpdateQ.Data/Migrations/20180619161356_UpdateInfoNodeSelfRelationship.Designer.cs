@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UpdateQ.Data;
 
 namespace UpdateQ.Data.Migrations
 {
     [DbContext(typeof(UpdateQContext))]
-    partial class UpdateQContextModelSnapshot : ModelSnapshot
+    [Migration("20180619161356_UpdateInfoNodeSelfRelationship")]
+    partial class UpdateInfoNodeSelfRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
