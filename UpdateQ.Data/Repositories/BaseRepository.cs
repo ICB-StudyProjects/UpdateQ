@@ -49,6 +49,9 @@
         public virtual T GetById(int id) 
             => this.dbSet.Find(id);
 
+        public virtual T GetById(Guid id)
+            => this.dbSet.Find(id);
+
         public virtual T Get(Expression<Func<T, bool>> condition)
             => this.dbSet.Where(condition).FirstOrDefault<T>();
 

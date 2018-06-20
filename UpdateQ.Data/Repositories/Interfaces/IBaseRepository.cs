@@ -12,6 +12,7 @@
         void Delete(Expression<Func<T, bool>> condition);
 
         T GetById(int id);
+        T GetById(Guid id);
         T Get(Expression<Func<T, bool>> condition);
         IEnumerable<T> GetAll();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> condition);
