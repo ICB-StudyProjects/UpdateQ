@@ -1,9 +1,8 @@
-﻿namespace MyApp.OAuth.Data.Migrations.IdentityServer
+﻿namespace UpdateQ.Data.Utils
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.Extensions.Configuration;
-    using UpdateQ.Data;
 
     public sealed class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<UpdateQContext>
     {

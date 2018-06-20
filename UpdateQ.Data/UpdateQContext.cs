@@ -13,6 +13,11 @@
         public DbSet<InfoNode> InfoNodes { get; set; }
         public DbSet<TimeSeriesNode> TimeSeriesNodes { get; set; }
 
+        public virtual void Commit()
+        {
+            base.SaveChanges();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
