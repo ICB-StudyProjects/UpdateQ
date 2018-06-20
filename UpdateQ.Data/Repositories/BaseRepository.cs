@@ -46,10 +46,7 @@
             }
         }
 
-        public virtual T GetById(int id) 
-            => this.dbSet.Find(id);
-
-        public virtual T GetById(Guid id)
+        public virtual T GetById<P>(P id) where P : struct
             => this.dbSet.Find(id);
 
         public virtual T Get(Expression<Func<T, bool>> condition)

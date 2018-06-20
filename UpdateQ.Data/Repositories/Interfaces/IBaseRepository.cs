@@ -11,8 +11,7 @@
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> condition);
 
-        T GetById(int id);
-        T GetById(Guid id);
+        T GetById<P>(P id) where P : struct;
         T Get(Expression<Func<T, bool>> condition);
         IEnumerable<T> GetAll();
         IEnumerable<T> GetMany(Expression<Func<T, bool>> condition);
