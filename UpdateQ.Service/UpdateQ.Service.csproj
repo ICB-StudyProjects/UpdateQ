@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UpdateQ.Data\UpdateQ.Data.csproj" />
+    <ProjectReference Include="..\UpdateQ.Model\UpdateQ.Model.csproj" />
+  </ItemGroup>
+
+</Project>
