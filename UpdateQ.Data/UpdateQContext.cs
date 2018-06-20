@@ -15,7 +15,7 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new InfoNodeConfiguration());
             modelBuilder.ApplyConfiguration(new TimeSeriesNodeConfiguration());
         }

@@ -8,11 +8,11 @@
     public class TimeSeriesNode
     {
         [Key]
-        public Guid SensorId { get; private set; }
+        public Guid SensorId { get; set; }
 
         public TimeSeriesType? Type { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = GlobalConstants.PropIsRequiredErrorMessage)]
         [StringLength(20, MinimumLength = 3, 
             ErrorMessage = GlobalConstants.StringValidationMessage)]
         public string Name { get; set; }

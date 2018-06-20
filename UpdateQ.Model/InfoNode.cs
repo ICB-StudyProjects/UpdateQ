@@ -10,12 +10,12 @@
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = GlobalConstants.PropIsRequiredErrorMessage)]
         [StringLength(20, MinimumLength = 3,
             ErrorMessage = GlobalConstants.StringValidationMessage)]
         public string Name { get; set; }
 
-        public DateTime CreatedOn { get; private set; }
+        public DateTime CreatedOn { get; set; }
         public DateTime? UpdatedOn { get; set; }
 
         public Guid OwnerId { get; set; }

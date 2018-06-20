@@ -10,13 +10,21 @@
         {
             builder.ToTable("InfoNodes");
 
-            builder.Property(i => i.Id)
-                   .ValueGeneratedOnAdd();
+            builder
+                .Property(i => i.Id)
+                .ValueGeneratedOnAdd();
 
-            builder.HasOne(i => i.ParentInfoNode)
+            builder
+                .HasOne(i => i.ParentInfoNode)
                 .WithMany(i => i.ChildInfoNodes)
                 .HasForeignKey(i => i.ParentInfoNodeId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasMany(i => i.TimeSeriesNodes)
+                .WithOne(t => t.InfoNode)
+                .HasForeignKey(t => t.InfoNodeId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

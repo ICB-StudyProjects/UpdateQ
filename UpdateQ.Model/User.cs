@@ -17,7 +17,7 @@
         // public string Password { get; set; }
         // public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = GlobalConstants.PropIsRequiredErrorMessage)]
         [StringLength(50,
             MinimumLength = 1,
             ErrorMessage = GlobalConstants.StringValidationMessage)]

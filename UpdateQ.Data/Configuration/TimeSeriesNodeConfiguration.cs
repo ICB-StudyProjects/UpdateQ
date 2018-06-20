@@ -10,7 +10,8 @@
         {
             builder.ToTable("TimeSeriesNodes");
 
-            builder.HasOne(t => t.InfoNode)
+            builder
+                .HasOne(t => t.InfoNode)
                 .WithMany(i => i.TimeSeriesNodes)
                 .HasForeignKey(t =>t.InfoNodeId)
                 .OnDelete(DeleteBehavior.Cascade);
