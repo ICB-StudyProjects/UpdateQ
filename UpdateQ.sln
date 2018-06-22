@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateQ.Model", "UpdateQ.Model\UpdateQ.Model.csproj", "{60FB751F-1E58-404E-924C-0072E30C276D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateQ.Model", "UpdateQ.Model\UpdateQ.Model.csproj", "{60FB751F-1E58-404E-924C-0072E30C276D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateQ.Data", "UpdateQ.Data\UpdateQ.Data.csproj", "{41103E0E-4392-4C09-9930-5E5337117932}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateQ.Data", "UpdateQ.Data\UpdateQ.Data.csproj", "{41103E0E-4392-4C09-9930-5E5337117932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateQ.Common", "UpdateQ.Common\UpdateQ.Common.csproj", "{39ED9270-3C8A-449B-88E1-F31E780D62BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateQ.Common", "UpdateQ.Common\UpdateQ.Common.csproj", "{39ED9270-3C8A-449B-88E1-F31E780D62BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateQ.Service", "UpdateQ.Service\UpdateQ.Service.csproj", "{D0CBB722-A523-495D-A3A1-E548F9839542}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateQ.Service", "UpdateQ.Service\UpdateQ.Service.csproj", "{D0CBB722-A523-495D-A3A1-E548F9839542}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateQ.Api", "UpdateQ.Api\UpdateQ.Api.csproj", "{B62A2A59-654E-4C93-B1E7-E04BB0F29E09}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BB81A4CF-5DCE-40BE-BB7C-2049FC5E04F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{D0CBB722-A523-495D-A3A1-E548F9839542}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0CBB722-A523-495D-A3A1-E548F9839542}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0CBB722-A523-495D-A3A1-E548F9839542}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B62A2A59-654E-4C93-B1E7-E04BB0F29E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B62A2A59-654E-4C93-B1E7-E04BB0F29E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B62A2A59-654E-4C93-B1E7-E04BB0F29E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B62A2A59-654E-4C93-B1E7-E04BB0F29E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB81A4CF-5DCE-40BE-BB7C-2049FC5E04F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB81A4CF-5DCE-40BE-BB7C-2049FC5E04F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB81A4CF-5DCE-40BE-BB7C-2049FC5E04F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB81A4CF-5DCE-40BE-BB7C-2049FC5E04F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
