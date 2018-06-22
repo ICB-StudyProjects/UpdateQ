@@ -18,7 +18,7 @@
             var connStr = configuration.GetConnectionString("UpdateQContext");
 
             builder.UseSqlServer(connStr);
-
+            
             return new UpdateQContext(builder.Options);
         }
     }

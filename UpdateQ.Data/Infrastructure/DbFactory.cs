@@ -2,7 +2,7 @@
 {
     using UpdateQ.Data.Utils;
 
-    class DbFactory : Disposable, IDbFactory
+    public class DbFactory : Disposable, IDbFactory
     {
         private UpdateQContext dbContext;
 

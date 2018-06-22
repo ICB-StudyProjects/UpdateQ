@@ -2,7 +2,7 @@
 {
     using System;
 
-    class Disposable : IDisposable
+    public class Disposable : IDisposable
     {
         private bool isDisposed;
 

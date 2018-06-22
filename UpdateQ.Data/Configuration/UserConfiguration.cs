@@ -2,7 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
 
     class UserConfiguration : IEntityTypeConfiguration<User>
     {

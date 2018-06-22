@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using UpdateQ.Data.Infrastructure;
     using UpdateQ.Data.Repositories;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
     using UpdateQ.Service.Interfaces;
 
     public class TimeSeriesNodeService : ITimeSeriesNodeService

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
 
     public interface IUserService
     {

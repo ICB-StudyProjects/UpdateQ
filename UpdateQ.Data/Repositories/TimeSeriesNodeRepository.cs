@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using UpdateQ.Data.Infrastructure;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
 
     public class TimeSeriesNodeRepository : BaseRepository<TimeSeriesNode>, ITimeSeriesNodeRepository
     {

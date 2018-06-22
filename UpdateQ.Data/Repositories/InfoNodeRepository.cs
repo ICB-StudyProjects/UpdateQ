@@ -2,7 +2,7 @@
 {
     using System;
     using UpdateQ.Data.Infrastructure;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
 
     public class InfoNodeRepository : BaseRepository<InfoNode>, IInfoNodeRepository
     {

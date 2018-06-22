@@ -1,7 +1,7 @@
 ﻿namespace UpdateQ.Data.Repositories
 {
     using UpdateQ.Data.Infrastructure;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
 
     public class UserRepository : BaseRepository<User>, IUserRepository
     {

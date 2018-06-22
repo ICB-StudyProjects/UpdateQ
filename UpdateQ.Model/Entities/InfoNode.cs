@@ -1,13 +1,15 @@
-﻿namespace UpdateQ.Model
+﻿namespace UpdateQ.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using UpdateQ.Common.Constants;
 
     public class InfoNode
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required(ErrorMessage = GlobalConstants.PropIsRequiredErrorMessage)]

@@ -1,6 +1,6 @@
 ﻿namespace UpdateQ.Data.Configuration
 {
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

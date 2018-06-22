@@ -1,7 +1,7 @@
 ﻿namespace UpdateQ.Service.Interfaces
 {
     using System.Collections.Generic;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
 
     public interface IInfoNodeService
     {

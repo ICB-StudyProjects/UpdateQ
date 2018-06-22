@@ -2,17 +2,13 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using UpdateQ.Model;
+    using UpdateQ.Model.Entities;
 
     public class InfoNodeConfiguration : IEntityTypeConfiguration<InfoNode>
     {
         public void Configure(EntityTypeBuilder<InfoNode> builder)
         {
             builder.ToTable("InfoNodes");
-
-            builder
-                .Property(i => i.Id)
-                .ValueGeneratedOnAdd();
 
             builder
                 .HasOne(i => i.ParentInfoNode)

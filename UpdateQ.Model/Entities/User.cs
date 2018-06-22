@@ -1,14 +1,16 @@
-﻿namespace UpdateQ.Model
+﻿namespace UpdateQ.Model.Entities
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using UpdateQ.Common;
     using UpdateQ.Common.Constants;
 
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         // TODO: Added them to the auth server's user model (claims)
