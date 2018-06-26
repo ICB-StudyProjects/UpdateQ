@@ -14,15 +14,27 @@
 
         public override IEnumerable<InfoNode> GetAll()
         {
-            var fullInfoNodes = this.DbContext
-                .InfoNodes
-                .Include(i => i.ParentInfoNode)
+            return this.DbContext.InfoNodes
+                .Where(node => node.ParentInfoNodeId == null)
                 .Include(i => i.ChildInfoNodes)
-                .Include(i => i.TimeSeriesNodes)
+                    .ThenInclude(m => m.TimeSeriesNodes)
                 .ToList();
-
-            return fullInfoNodes;
         }
+
+        //private void LoadSubordinates(ref InfoNode node)
+        //{
+        //    TODO: Write generic async parallel traversal tree alg
+        //    this.DbContext.Entry(node)
+        //        .Include(i => i.ParentInfoNode)
+        //        .Include(i => i.ChildInfoNodes)
+        //        .Include(i => i.TimeSeriesNodes)
+        //        .Load();
+        //} 
+
+        //private void LoadSubordinates(this ref InfoNode parent)
+        //{
+        //    this.DbContext.Entry(parent).Collections;
+        //}
 
         public override void Update(InfoNode entity)
         {

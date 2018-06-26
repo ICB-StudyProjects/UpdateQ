@@ -28,11 +28,13 @@
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                    // TODO: Change to more secure one
+                    builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
                 });
             });
 
-            services.AddMvc()
+            services.AddMvcCore()
+                .AddJsonFormatters()
                 .AddJsonOptions(option =>
                 {
                     option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -42,6 +44,7 @@
             services.AddScoped<IInfoNodeService, InfoNodeService>();
             services.AddScoped<ITimeSeriesNodeService, TimeSeriesNodeService>();
 
+            // TODO: Add assembly ref and register them from there
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IInfoNodeRepository, InfoNodeRepository>();
             services.AddScoped<ITimeSeriesNodeRepository, TimeSeriesNodeRepository>();
