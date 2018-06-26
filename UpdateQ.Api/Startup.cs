@@ -1,16 +1,11 @@
 ﻿namespace UpdateQ.Api
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.Options;
+    using Newtonsoft.Json;
     using NLog.Extensions.Logging;
     using UpdateQ.Data.Infrastructure;
     using UpdateQ.Data.Repositories;
@@ -24,15 +19,32 @@
             Configuration = configuration;
         }
 
-        public static IConfiguration Configuration { get; private set; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddCors(options => 
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                });
+            });
+
+            services.AddMvc()
+                .AddJsonOptions(option =>
+                {
+                    option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IInfoNodeService, InfoNodeService>();
+            services.AddScoped<ITimeSeriesNodeService, TimeSeriesNodeService>();
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IInfoNodeRepository, InfoNodeRepository>();
+            services.AddScoped<ITimeSeriesNodeRepository, TimeSeriesNodeRepository>();
             services.AddScoped<IDbFactory, DbFactory>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
@@ -47,6 +59,8 @@
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
             }
+
+            app.UseCors("AllowAll");
 
             app.UseMvc();
         }
