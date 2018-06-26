@@ -1,0 +1,14 @@
+﻿<section class="sidebar">
+    <ul>
+        <li *ngFor="let node of InfoNodes">
+            {{node.name}}
+        </li>
+    </ul>
+</section> 
+<div class="ui-g">
+
+    <p-slideMenu [model]="items"></p-slideMenu>
+
+    <p-panelMenu [model]="items" [style]="{'width':'300px'}"></p-panelMenu>
+  
+  </div>
