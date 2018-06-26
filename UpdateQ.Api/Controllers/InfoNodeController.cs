@@ -1,29 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using UpdateQ.Service.Interfaces;
-
-namespace UpdateQ.Api.Controllers
+﻿namespace UpdateQ.Api.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/InfoNode")]
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Mvc;
+    using UpdateQ.Model.Entities;
+    using UpdateQ.Service.Interfaces;
+
+    [Route("api/infonode")]
     public class InfoNodeController : Controller
     {
-        private readonly IUserService userService;
+        private readonly IInfoNodeService infoNodeService;
 
-        public InfoNodeController(IUserService userService)
+        public InfoNodeController(IInfoNodeService infoNodeService)
         {
-            this.userService = userService;
+            this.infoNodeService = infoNodeService;
         }
 
         // GET: api/InfoNode
         [HttpGet]
-        public IEnumerable<string> Get()
+        //[Produces("application/json")]
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var infoNodes = this.infoNodeService.GetInfoNodes();
+
+            if (infoNodes == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(infoNodes);
         }
 
         //// GET: api/InfoNode/5

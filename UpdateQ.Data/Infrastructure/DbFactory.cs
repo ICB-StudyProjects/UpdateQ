@@ -11,6 +11,7 @@
 
         protected override void DisposeCore()
         {
+            // TODO: Check if the context is disposing
             if (this.dbContext != null)
             {
                 this.dbContext.Dispose();
