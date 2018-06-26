@@ -21,26 +21,23 @@ namespace UpdateQ.Web._2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettings"));
-
+            //services.Configure<ClientAppSettings>(Configuration.GetSection("ClientAppSettings"));
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    // TODO: Change to more secure one
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
-            });
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowAllOrigins",
-                    builder =>
-                    {
-                        builder
-                            .AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                    });
             });
         }
 
@@ -57,7 +54,7 @@ namespace UpdateQ.Web._2
                 app.UseHsts();
             }
 
-            app.UseCors("AllowAllOrigins");
+            app.UseCors("AllowAll");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -70,18 +67,18 @@ namespace UpdateQ.Web._2
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
-            {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+            //app.UseSpa(spa =>
+            //{
+            //    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+            //    // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+            //    spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
         }
     }
 }

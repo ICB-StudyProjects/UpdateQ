@@ -1,0 +1,17 @@
+<section class="sidebar">
+    <ul>
+        <li *ngFor="let node of InfoNodes">
+            {{node.name}}
+        </li>
+    </ul>
+</section> 
+<div class="ui-g">
+
+  <p-slideMenu [model]="items"></p-slideMenu>
+
+  <!--p-panel header="Hours By Team (mixed)" class="ui-g-12 ui-md-6">
+    <p-chart type="bar" [data]="hoursByTeamChartDataMixed" #mixedChart
+             (onDataSelect)="onDataSelect($event)"></p-chart>
+  </p-panel>-->
+
+</div>

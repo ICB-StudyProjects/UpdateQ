@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UpdateQ.Web._2.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/sampledata")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -14,7 +14,7 @@ namespace UpdateQ.Web._2.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
+        [HttpGet("weatherforecasts")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();

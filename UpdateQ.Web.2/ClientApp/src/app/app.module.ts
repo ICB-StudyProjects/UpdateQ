@@ -11,7 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { Configuration } from './app.constants';
 import { infoNodesService } from './infonodes/infonodes.service';
-import { InfoNodeListComponent } from './infonodes/components/list/infonode.list.component';
+import { InfoNodeListComponent } from './infonodes/components/list/infonode-list.component';
 
 @NgModule({
   declarations: [
