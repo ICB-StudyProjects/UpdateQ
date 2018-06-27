@@ -1,5 +1,6 @@
 ﻿namespace UpdateQ.Api
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -7,8 +8,11 @@
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using NLog.Extensions.Logging;
+    using UpdateQ.Api.Configuration;
     using UpdateQ.Data.Infrastructure;
     using UpdateQ.Data.Repositories;
+    using UpdateQ.Model.DTOs;
+    using UpdateQ.Model.Entities;
     using UpdateQ.Service;
     using UpdateQ.Service.Interfaces;
 
@@ -64,6 +68,16 @@
             }
 
             app.UseCors("AllowAll");
+
+            //AutoMapperConfiguration.Initialize();
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<TimeSeriesNode, NodeTimeSeriesReadDTO>();
+                cfg.CreateMap<InfoNode, NodesReadDTO>()
+                        .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.ChildInfoNodes))
+                        .ForMember(dest => dest.Label, opt => opt.MapFrom(src => src.Name))
+                        .ForMember(dest => dest.TSNodes, opt => opt.MapFrom(src => src.TimeSeriesNodes));
+            });
 
             app.UseMvc();
         }
