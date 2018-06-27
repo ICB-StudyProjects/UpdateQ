@@ -5,13 +5,15 @@
 
     public class NodesReadDTO
     {
-        public string Name { get; set; }
+        public string Label { get; set; }
 
-        public ICollection<InfoNode> Nodes { get; set; }
+        public ICollection<NodesReadDTO> Items { get; set; }
+        public ICollection<NodeTimeSeriesReadDTO> TSNodes { get; set; }
 
         public NodesReadDTO()
         {
-            this.Nodes = new HashSet<InfoNode>();
+            this.Items = new HashSet<NodesReadDTO>();
+            this.TSNodes = new HashSet<NodeTimeSeriesReadDTO>();
         }
     }
 }
