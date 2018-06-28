@@ -9,11 +9,15 @@ import { InfoNodeListComponent } from './infonodes/components/list/infonode-list
 import { infoNodesService } from './infonodes/infonodes.service';
 import { Configuration } from './app.constants';
 import { SlideMenuModule, PanelMenuModule } from 'primeng/primeng';
+import { FooterComponent } from './template/footer/footer.component';
+import { HeaderComponent } from './template/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InfoNodeListComponent
+    InfoNodeListComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

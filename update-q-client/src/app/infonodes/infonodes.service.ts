@@ -17,10 +17,10 @@ export class infoNodesService {
     }
 
     private setHeaders() {
-        this.headers = new HttpHeaders();
-        this.headers = this.headers.set('Content-Type', 'application/json');
-        this.headers = this.headers.set('Accept', 'application/json');
-      //this.headers = this.headers.set('Access-Control-Allow-Credentials', 'true')
+        this.headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        });
 
         // TODO: Get token from Auth Server
         //const token = this._securityService.getToken();
@@ -32,7 +32,7 @@ export class infoNodesService {
 
     public getAll(): Observable<InfoNode[]> {
         this.setHeaders();
-        console.log('Inside getAll method!')
+
         return this.http.get<InfoNode[]>(this.actionUrl, { headers: this.headers });
     }
 
