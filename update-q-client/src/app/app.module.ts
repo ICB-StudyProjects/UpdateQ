@@ -8,16 +8,18 @@ import { AppComponent } from './app.component';
 import { InfoNodeListComponent } from './infonodes/components/list/infonode-list.component';
 import { infoNodesService } from './infonodes/infonodes.service';
 import { Configuration } from './app.constants';
-import { SlideMenuModule, PanelMenuModule } from 'primeng/primeng';
+import { SlideMenuModule, PanelMenuModule, PanelModule, ChartModule } from 'primeng/primeng';
 import { FooterComponent } from './template/footer/footer.component';
 import { HeaderComponent } from './template/header/header.component';
+import { ChartComponent } from './dashboard/chart/chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InfoNodeListComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,7 @@ import { HeaderComponent } from './template/header/header.component';
     HttpClientModule,
     FormsModule,
     // PrimeNg modules
-    SlideMenuModule, PanelMenuModule
+    SlideMenuModule, PanelMenuModule, PanelModule, ChartModule
   ],
   providers: [
     Configuration,
