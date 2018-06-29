@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 import { InfoNode } from '../models/info-node.model';
 import { infoNodesService } from '../info-nodes.service';
@@ -16,7 +17,8 @@ export class InfoNodeListComponent implements OnInit {
     public items: MenuItem[] = [];
 
     constructor(
-        private _infoNodesService: infoNodesService
+        private _infoNodesService: infoNodesService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -115,6 +117,8 @@ export class InfoNodeListComponent implements OnInit {
         } else {
             item.icon = 'fa fa-star-o'
         }
+
+        this.router.navigate(['/dashboard']);
 
         console.log(tsNode.sensorId)
     }

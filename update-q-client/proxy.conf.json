@@ -1,6 +1,0 @@
-{
-  "/api/infonode": {
-    "target": "http://localhost:50253",
-    "secure": false
-  }
-}
