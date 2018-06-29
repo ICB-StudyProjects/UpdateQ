@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Configuration } from '../app.constants';
 
-import { InfoNode } from './models/infonode';
+import { InfoNode } from './models/info-node.model';
 
 @Injectable()
 export class infoNodesService {
