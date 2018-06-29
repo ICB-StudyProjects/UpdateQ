@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SlideMenuModule,
-   PanelMenuModule } from 'primeng/primeng';
+   PanelMenuModule, 
+   CheckboxModule,
+   RadioButtonModule,
+   ButtonModule} from 'primeng/primeng';
 
 
 import { InfoNodeCreateComponent } from './create/info-node-create.component';
@@ -18,7 +21,7 @@ import { infoNodesService } from './info-nodes.service';
     RouterModule,
     FormsModule,
     // PrimeNg Modules
-    SlideMenuModule, PanelMenuModule, 
+    SlideMenuModule, PanelMenuModule, CheckboxModule, RadioButtonModule, ButtonModule
   ],
   declarations: [
     InfoNodeListComponent,

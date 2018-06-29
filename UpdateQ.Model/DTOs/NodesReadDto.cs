@@ -1,10 +1,10 @@
 ﻿namespace UpdateQ.Model.DTOs
 {
     using System.Collections.Generic;
-    using UpdateQ.Model.Entities;
 
     public class NodesReadDTO
     {
+        public int Id { get; set; }
         public string Label { get; set; }
 
         public ICollection<NodesReadDTO> Items { get; set; }

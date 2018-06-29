@@ -92,14 +92,14 @@ export class InfoNodeListComponent implements OnInit {
                 label: infoNode.label,
                 icon: 'fa fa-fw fa-arrow-circle-right',
                 items: [],
-                command: (click: MouseEvent) => this.changeIconInfoNode(click)
+                command: (click: MouseEvent) => this.changeIconInfoNode(click, infoNode)
             };
         }
 
         return menuItem;
     }
 
-    private changeIconInfoNode(event) : void {
+    private changeIconInfoNode(event, infoNode: InfoNode) : void {
         let item = event.item
 
         if (item.expanded && item.items.length) {
@@ -107,6 +107,8 @@ export class InfoNodeListComponent implements OnInit {
         } else {
             item.icon = 'fa fa-fw fa-arrow-circle-right'
         }
+
+        //this.router.navigate(['/node/create']);
     }
 
     private handleTSNode(event, tsNode: TimeSeriesNode) {

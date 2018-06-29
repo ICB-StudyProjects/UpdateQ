@@ -3,6 +3,7 @@
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using UpdateQ.Model.DTOs;
     using UpdateQ.Model.Entities;
@@ -42,11 +43,12 @@
         //    return "value";
         //}
 
-        //// POST: api/InfoNode
-        //[HttpPost]
-        //public void Post([FromBody]string value)
-        //{
-        //}
+        // POST: api/InfoNode
+        [HttpPost]
+        public void Post([FromBody]string value)
+        {
+            Debug.WriteLine(value);
+        }
 
         //// PUT: api/InfoNode/5
         //[HttpPut("{id}")]
