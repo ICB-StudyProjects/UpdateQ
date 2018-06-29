@@ -3,35 +3,33 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PanelModule, ChartModule } from 'primeng/primeng';
 
 import { AppComponent } from './app.component';
-import { InfoNodeListComponent } from './infonodes/components/list/infonode-list.component';
-import { infoNodesService } from './infonodes/infonodes.service';
 import { Configuration } from './app.constants';
-import { SlideMenuModule, PanelMenuModule, PanelModule, ChartModule } from 'primeng/primeng';
 import { FooterComponent } from './template/footer/footer.component';
 import { HeaderComponent } from './template/header/header.component';
-import { ChartComponent } from './dashboard/chart/chart.component';
+import { InfoNodeModule } from './infonodes/info-nodes.module';
+import { RoutesModule } from './_routes/routes.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InfoNodeListComponent,
     FooterComponent,
-    HeaderComponent,
-    ChartComponent
+    HeaderComponent
   ],
   imports: [
+    // Ng modules
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    // PrimeNg modules
-    SlideMenuModule, PanelMenuModule, PanelModule, ChartModule
+    RoutesModule,
+    // App Modules
+    InfoNodeModule
   ],
   providers: [
-    Configuration,
-    infoNodesService
+    Configuration
   ],
   bootstrap: [AppComponent]
 })

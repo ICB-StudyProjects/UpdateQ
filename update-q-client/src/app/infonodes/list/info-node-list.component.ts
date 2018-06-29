@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
-import { InfoNode } from '../../models/info-node.model';
-import { infoNodesService } from '../../infonodes.service';
-import { TimeSeriesNode } from '../../models/time-series-node.model';
+import { InfoNode } from '../models/info-node.model';
+import { infoNodesService } from '../info-nodes.service';
+import { TimeSeriesNode } from '../models/time-series-node.model';
 //import { TimeSeriesNode } from '../../models/time-series-node.model';
 
 @Component({
@@ -24,14 +24,11 @@ export class InfoNodeListComponent implements OnInit {
     }
 
     private getData(): void {
-        //console.log('Inside getData method!')
         this._infoNodesService.getAll()
             .subscribe(data => this.InfoNodes = data,
                 error => console.log(error),
                 () => {
                     this.modelSidebarData();
-
-                    console.log('GET all nodes is completed!')
                 });
     }
 
@@ -56,11 +53,8 @@ export class InfoNodeListComponent implements OnInit {
             // child (info-node) -> MenuItem
             let childMenuItemNode: MenuItem = this.factoryMenuItem(child);
 
-            // Check child.items array if it has nodes and process them
-            //if (child.items) {
             // Recursion!!!
             this.processAndAddMenuNodes(childMenuItemNode, child);
-            //}
 
             (parentMenuNode.items as MenuItem[]).push(childMenuItemNode);
         }
