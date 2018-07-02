@@ -8,7 +8,7 @@
     using UpdateQ.Model.DTOs;
     using UpdateQ.Service.Interfaces;
 
-    //[Authorize]
+    [Authorize]
     [Route("api/infonode")]
     public class InfoNodeController : Controller
     {

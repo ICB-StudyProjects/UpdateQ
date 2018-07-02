@@ -57,8 +57,8 @@
                         "updateq"
                     },
                     AllowAccessTokensViaBrowser = true, // Should be {false}
-                    RedirectUris = { "http://localhost:4200/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:4200/signin-callback-oidc" }
+                    RedirectUris = { "http://localhost:49342/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:49342/signin-callback-oidc" }
                 },
                 //new Client
                 //{

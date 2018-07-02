@@ -37,7 +37,7 @@
                 options.AddPolicy("AllowAll", builder =>
                 {
                     // TODO: Change to more secure one
-                    builder.WithOrigins("http://localhost:4200")
+                    builder.WithOrigins("http://localhost:4200", "http://localhost:49342")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
@@ -46,23 +46,23 @@
 
             services
                 .AddMvcCore()
-                //.AddAuthorization()
+                .AddAuthorization()
                 .AddJsonFormatters()
                 .AddJsonOptions(option =>
                 {
                     option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
 
-            //services
-            //    .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-            //    .AddIdentityServerAuthentication(options =>
-            //    {
-            //        options.Authority = "http://localhost:52351/";
-            //        options.RequireHttpsMetadata = false; // TODO: Change to {true} if in production
-            //        options.ApiName = "updateq";
-            //    });
+            services
+                .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:52351/";
+                    options.RequireHttpsMetadata = false; // TODO: Change to {true} if in production
+                    options.ApiName = "updateq";
+                });
 
-            // TODO: Add TLS
+            //TODO: Add TLS
             //services.AddHttpsRedirection(options =>
             //{
             //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
@@ -94,7 +94,7 @@
 
             app.UseCors("AllowAll");
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             // For TLS
             //app.UseHttpsRedirection();
