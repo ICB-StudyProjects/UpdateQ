@@ -17,6 +17,8 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UpdateQ.Web.2", "UpdateQ.Web.2\UpdateQ.Web.2.csproj", "{8544723A-CFD6-4FFA-9B13-AB68BB9AB553}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeus.Idp", "Zeus.Idp\Zeus.Idp.csproj", "{B43896BD-31B0-4C88-92A0-B77B1247B939}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{8544723A-CFD6-4FFA-9B13-AB68BB9AB553}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8544723A-CFD6-4FFA-9B13-AB68BB9AB553}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8544723A-CFD6-4FFA-9B13-AB68BB9AB553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B43896BD-31B0-4C88-92A0-B77B1247B939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B43896BD-31B0-4C88-92A0-B77B1247B939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B43896BD-31B0-4C88-92A0-B77B1247B939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B43896BD-31B0-4C88-92A0-B77B1247B939}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

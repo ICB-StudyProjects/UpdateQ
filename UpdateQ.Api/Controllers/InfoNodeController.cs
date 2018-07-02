@@ -1,14 +1,14 @@
 ﻿namespace UpdateQ.Api.Controllers
 {
     using AutoMapper;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using UpdateQ.Model.DTOs;
-    using UpdateQ.Model.Entities;
     using UpdateQ.Service.Interfaces;
 
+    //[Authorize]
     [Route("api/infonode")]
     public class InfoNodeController : Controller
     {
