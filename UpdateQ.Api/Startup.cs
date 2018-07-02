@@ -69,15 +69,8 @@
 
             app.UseCors("AllowAll");
 
-            //AutoMapperConfiguration.Initialize();
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<TimeSeriesNode, NodeTimeSeriesReadDTO>();
-                cfg.CreateMap<InfoNode, NodesReadDTO>()
-                        .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.ChildInfoNodes))
-                        .ForMember(dest => dest.Label, opt => opt.MapFrom(src => src.Name))
-                        .ForMember(dest => dest.TSNodes, opt => opt.MapFrom(src => src.TimeSeriesNodes));
-            });
+            //AutoMapperConfiguration.Initialize(); // Need to be used instead of the Mapper class
+            AutoMapperConf.RegisterMappings();
 
             app.UseMvc();
         }
