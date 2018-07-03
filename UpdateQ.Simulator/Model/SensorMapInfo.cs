@@ -11,6 +11,7 @@
         public int StartRange { get; set; }
         public int EndRange { get; set; }
         public TimeSpan Interval { get; set; }
+        public bool IsActive { get; set; }
 
         [JsonConstructor]
         public SensorMapInfo(Guid sensorId)

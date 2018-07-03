@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using System.Threading;
     using UpdateQ.Simulator.Core.Interfaces;
 
     public class Engine : IEngine

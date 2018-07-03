@@ -7,9 +7,9 @@
     {
         Task<string> RegisterSensors();
         string AddSensorInputData(IList<string> arguments);
-        string Start(string sensorId);
-        string Stop(string sensorId);
-        string ChangeGeneratorSensor(string methodTypeStr, string sensorId);
+        string Start(string sensorIdStr);
+        string Stop(string sensorIdStr);
+        string ChangeGeneratorSensor(string methodTypeStr, string sensorIdStr);
         string ChangeGeneratorAllSensors(string methodTypeStr);
         string Shutdown();
     }

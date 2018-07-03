@@ -8,7 +8,9 @@
     {
         static void Main(string[] args)
         {
-            IEngine engine = new Engine(new SensorManager());
+            IRequestManager requestManager = new RequestManager();
+            ISensorManager sensorManager = new SensorManager(requestManager);
+            IEngine engine = new Engine(sensorManager);
 
             engine.Run();
 

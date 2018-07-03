@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using UpdateQ.Simulator.Core.Interfaces;
     using UpdateQ.Simulator.Model;
@@ -14,9 +15,11 @@
     {
         private string resultMsg;
         private ICollection<SensorMapInfo> sensorsData;
+        private IRequestManager requestManager;
 
-        public SensorManager()
+        public SensorManager(IRequestManager requestManager)
         {
+            this.requestManager = requestManager;
             this.sensorsData = new HashSet<SensorMapInfo>();
         }
 
@@ -54,8 +57,15 @@
             return this.resultMsg;
         }
 
-        public string Start(string sensorId)
+        public string Start(string sensorIdStr)
         {
+            Guid sensorId = Guid.Parse(sensorIdStr);
+
+            var cts = new CancellationTokenSource();
+            Task.Factory.StartNew(() => Task.Delay(1000, cts.Token));
+            cts.Cancel();
+
+
             // TODO: Start sending data for sensor through http requester (class)
             throw new NotImplementedException();
         }
@@ -86,7 +96,7 @@
             {
                 try
                 {
-                    var methodType = (GenMethodTypeEnum)Enum.Parse(typeof(GenMethodTypeEnum), methodTypeStr);
+                    var methodType = (GenMethodTypeEnum) Enum.Parse(typeof(GenMethodTypeEnum), methodTypeStr);
 
                     sensor.TypeGenerator = methodType;
 
@@ -105,7 +115,7 @@
         {
             try
             {
-                var methodType = (GenMethodTypeEnum)Enum.Parse(typeof(GenMethodTypeEnum), methodTypeStr);
+                var methodType = (GenMethodTypeEnum) Enum.Parse(typeof(GenMethodTypeEnum), methodTypeStr);
 
                 foreach (var sensor in this.sensorsData)
                 {
