@@ -1,29 +1,33 @@
 ﻿namespace UpdateQ.Simulator
 {
-    using Microsoft.Extensions.DependencyInjection;
+    using Autofac;
     using UpdateQ.Simulator.Core;
     using UpdateQ.Simulator.Core.Interfaces;
 
     class Startup
     {
+        private static IContainer Container { get; set; }
+
         static void Main(string[] args)
         {
-            IRequestManager requestManager = new RequestManager();
-            ISensorManager sensorManager = new SensorManager(requestManager);
-            IEngine engine = new Engine(sensorManager);
+            RegisterDependencies();
 
-            engine.Run();
-
-            //RegisterServices();
+            using (var scope = Container.BeginLifetimeScope())
+            {
+                var engine = scope.Resolve<IEngine>();
+                engine.Run();
+            }
         }
 
-        public static void RegisterServices()
+        public static void RegisterDependencies()
         {
-            // TODO: Add DI
-            //var engineProvider = new ServiceCollection()
-            //    .AddSingleton<IEngine, Engine>()
-            //    .AddSingleton<ISensorManager, SensorManager>()
-            //    .BuildServiceProvider();
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<RequestManager>().As<IRequestManager>();
+            builder.RegisterType<SensorManager>().As<ISensorManager>();
+            builder.RegisterType<Engine>().As<IEngine>();
+
+            Container = builder.Build();
         }
     }
 }

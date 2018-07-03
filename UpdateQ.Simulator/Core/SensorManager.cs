@@ -28,7 +28,7 @@
             using (StreamReader sr = new StreamReader(Constants.APPSETTING_FULL_PATH))
             {
                 string file = await sr.ReadToEndAsync();
-                this.sensorsData = JsonConvert.DeserializeObject<HashSet<SensorMapInfo>>(file);
+                this.sensorsData = JsonConvert.DeserializeObject<ContainerSensorsModel>(file).Sensors;
             }
 
             return Operations.SuccessfullyInitAllSensors;
