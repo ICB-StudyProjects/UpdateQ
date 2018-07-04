@@ -15,7 +15,7 @@
     {
         private string resultMsg;
         private ICollection<SensorMapInfo> sensorsData;
-        private IRequestManager requestManager;
+        private readonly IRequestManager requestManager;
 
         public SensorManager(IRequestManager requestManager)
         {
@@ -61,13 +61,25 @@
         {
             Guid sensorId = Guid.Parse(sensorIdStr);
 
-            var cts = new CancellationTokenSource();
-            Task.Factory.StartNew(() => Task.Delay(1000, cts.Token));
-            cts.Cancel();
+            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
+
+            if (sensor == null)
+            {
+                this.resultMsg = Operations.SensorNotRegistered(sensorId);
+            }
+            else
+            {
+                this.requestManager.StartSendindSensorData(sensor);
+
+                this.resultMsg = Operations.StartSendingSensorData(sensorId);
+            }
+
+            //var cts = new CancellationTokenSource();
+            //Task.Factory.StartNew(() => Task.Delay(1000, cts.Token));
+            //cts.Cancel();
 
 
-            // TODO: Start sending data for sensor through http requester (class)
-            throw new NotImplementedException();
+            return this.resultMsg;
         }
 
         public string Stop(string sensorId)

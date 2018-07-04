@@ -1,7 +1,9 @@
 ﻿namespace UpdateQ.Simulator.Core.Interfaces
 {
+    using UpdateQ.Simulator.Model;
+
     public interface IRequestManager
     {
-        // TODO:
+        void StartSendindSensorData(SensorMapInfo sensor);
     }
 }

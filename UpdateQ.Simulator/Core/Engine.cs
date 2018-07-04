@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using UpdateQ.Simulator.Core.Interfaces;
+    using UpdateQ.Simulator.Utils;
 
     public class Engine : IEngine
     {
@@ -60,6 +61,9 @@
                 case "Shutdown":
                     this.outputMsg = this.sensorManager.Shutdown();
                     this.isRunning = false;
+                    break;
+                default:
+                    this.outputMsg = Operations.InvalidCommand;
                     break;
             }
 
