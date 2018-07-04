@@ -1,4 +1,4 @@
-﻿namespace UpdateQ.Simulator.Core
+﻿namespace UpdateQ.Simulator.Core.Managers
 {
     using Newtonsoft.Json;
     using System;
@@ -15,11 +15,11 @@
     {
         private string resultMsg;
         private ICollection<SensorMapInfo> sensorsData;
-        private readonly IRequestManager requestManager;
+        private readonly ITaskManager taskManager;
 
-        public SensorManager(IRequestManager requestManager)
+        public SensorManager(ITaskManager taskManager)
         {
-            this.requestManager = requestManager;
+            this.taskManager = taskManager;
             this.sensorsData = new HashSet<SensorMapInfo>();
         }
 
@@ -67,25 +67,46 @@
             {
                 this.resultMsg = Operations.SensorNotRegistered(sensorId);
             }
+            else if (sensor.IsActive)
+            {
+                this.resultMsg = Operations.SensorIsActive(sensorId);
+            }
             else
             {
-                this.requestManager.StartSendindSensorData(sensor);
+                this.taskManager.StartSendindSensorData(sensor);
 
-                this.resultMsg = Operations.StartSendingSensorData(sensorId);
+                sensor.IsActive = true;
+
+                this.resultMsg = Operations.StartedSendingSensorData(sensorId);
             }
-
-            //var cts = new CancellationTokenSource();
-            //Task.Factory.StartNew(() => Task.Delay(1000, cts.Token));
-            //cts.Cancel();
-
 
             return this.resultMsg;
         }
 
-        public string Stop(string sensorId)
+        public string Stop(string sensorIdStr)
         {
-            // TODO: Stop sending data for sensor through http requester (class)
-            throw new NotImplementedException();
+            Guid sensorId = Guid.Parse(sensorIdStr);
+
+            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
+
+            if (sensor == null)
+            {
+                this.resultMsg = Operations.SensorNotRegistered(sensorId);
+            }
+            else if (!sensor.IsActive)
+            {
+                this.resultMsg = Operations.SensorIsNotActive(sensorId);
+            }
+            else
+            {
+                this.taskManager.StopSendindSensorData(sensorId);
+
+                sensor.IsActive = false;
+
+                this.resultMsg = Operations.StoppedSendingSensorData(sensorId);
+            }
+
+            return this.resultMsg;
         }
 
         public string Shutdown()

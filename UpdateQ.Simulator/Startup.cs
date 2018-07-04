@@ -2,6 +2,7 @@
 {
     using Autofac;
     using UpdateQ.Simulator.Core;
+    using UpdateQ.Simulator.Core.Managers;
     using UpdateQ.Simulator.Core.Interfaces;
 
     class Startup
@@ -25,6 +26,7 @@
 
             builder.RegisterType<RequestManager>().As<IRequestManager>();
             builder.RegisterType<SensorManager>().As<ISensorManager>();
+            builder.RegisterType<TaskManager>().As<ITaskManager>();
             builder.RegisterType<Engine>().As<IEngine>();
 
             Container = builder.Build();
