@@ -1,7 +1,9 @@
 ﻿namespace UpdateQ.Simulator.Core.Interfaces
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using UpdateQ.Simulator.Model;
 
     public interface ISensorManager
     {
@@ -11,6 +13,7 @@
         string Stop(string sensorIdStr);
         string ChangeGeneratorSensor(string methodTypeStr, string sensorIdStr);
         string ChangeGeneratorAllSensors(string methodTypeStr);
+        SensorDto GetSensorData(Guid sensorId);
         string Shutdown();
     }
 }

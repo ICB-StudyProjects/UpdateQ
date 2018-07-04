@@ -5,7 +5,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using UpdateQ.Simulator.Core.Interfaces;
     using UpdateQ.Simulator.Model;
@@ -16,11 +15,13 @@
         private string resultMsg;
         private ICollection<SensorMapInfo> sensorsData;
         private readonly ITaskManager taskManager;
+        private Random randomGen;
 
         public SensorManager(ITaskManager taskManager)
         {
             this.taskManager = taskManager;
             this.sensorsData = new HashSet<SensorMapInfo>();
+            this.randomGen = new Random();
         }
 
         public async Task<string> RegisterSensors()
@@ -73,7 +74,7 @@
             }
             else
             {
-                this.taskManager.StartSendindSensorData(sensor);
+                this.taskManager.StartSendindSensorData(sensor.SensorId, sensor.Interval);
 
                 sensor.IsActive = true;
 
@@ -163,6 +164,41 @@
             }
 
             return this.resultMsg;
+        }
+
+        public SensorDto GetSensorData(Guid sensorId)
+        {
+            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
+
+            var randomSensorData = CreateRandomSensorData(sensor.StartRange, sensor.EndRange, sensor.TypeGenerator);
+
+            SensorDto sensorDataObg = new SensorDto
+            {
+                SensorId = sensor.SensorId,
+                CurrentData = randomSensorData
+            };
+
+            return sensorDataObg;
+        }
+
+        private int CreateRandomSensorData(int startRange, int endRange, GenMethodTypeEnum typeGenerator)
+        {
+            int randomSensorData = 0;
+
+            switch (typeGenerator)
+            {
+                case GenMethodTypeEnum.Random:
+                    randomSensorData = randomGen.Next(startRange, endRange);
+                    break;
+                case GenMethodTypeEnum.Sin:
+                    // Sin
+                    break;
+                case GenMethodTypeEnum.Cos:
+                    // Random
+                    break;
+            }
+
+            return randomSensorData;
         }
     }
 }

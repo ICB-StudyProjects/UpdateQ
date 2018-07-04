@@ -2,39 +2,46 @@
 {
     using System;
     using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Threading;
     using UpdateQ.Simulator.Core.Interfaces;
     using UpdateQ.Simulator.Model;
 
     public class RequestManager : IRequestManager
     {
         private readonly HttpClient client;
-        //private readonly ITaskManager taskManager;
+        private readonly ISensorManager sensorManager;
 
-        public RequestManager(/*ITaskManager taskManager*/)
+        public RequestManager(ISensorManager sensorManager)
         {
+            this.sensorManager = sensorManager;
             this.client = new HttpClient();
-            //this.taskManager = taskManager;
+
+            this.SetHeaders();
         }
 
-        public HttpClient CreateSensorHttpRequest(SensorMapInfo sensor)
+        public void SendSensorHttpRequest(Guid sensorId, CancellationToken cToken)
         {
-            // var randomDataToSend = GetRandomSensorData(sensor.StartRange, sensor.EndRange, sensor.TypeGenerator);
+            SensorDto sensorData = this.sensorManager.GetSensorData(sensorId);
 
-            // TODO: Create and return http request (Task)
-            throw new NotImplementedException();
+            //var jsonStrData = JsonConvert.SerializeObject(sensorData);
+            ////var jsonData = JObject.FromObject(product);
+
+            //HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "api/values");
+            //request.Content = new StringContent(jsonStrData, Encoding.UTF8, "application/json");
+
+            //this.client.SendAsync(request);
+
+            // Sending Post HTTP Request with CancellationTokens
+            this.client.PostAsJsonAsync("api/products", sensorData, cToken);
         }
 
         private void SetHeaders()
         {
-            // TODO: Add http request headers
-            throw new NotImplementedException();
-        }
-
-        private int GetRandomSensorData(int startRange, int endRange/*, GenMethodTypeEnum typeGenerator*/)
-        {
-            // Generate random integer data in 3 ways
-            // Maybe put it in Utils as "RandomGenerator"?
-            throw new NotImplementedException();
+            this.client.BaseAddress = new Uri("http://localhost:64195/");
+            this.client.DefaultRequestHeaders.Accept.Clear();
+            this.client.DefaultRequestHeaders.Accept
+                .Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace UpdateQ.Simulator.Core.Interfaces
 {
-    using System.Net.Http;
-    using UpdateQ.Simulator.Model;
+    using System;
+    using System.Threading;
 
     public interface IRequestManager
     {
-        HttpClient CreateSensorHttpRequest(SensorMapInfo sensor);
+        void SendSensorHttpRequest(Guid sensorId, CancellationToken cToken);
     }
 }
