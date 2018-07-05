@@ -14,20 +14,23 @@
         public static string SuccessfullyChangedSensorData(Guid sensorId)
             => $"Sensor {sensorId.ToString()} had successfully changed its data";
 
+        public static string SuccessfullyAddedSensor(Guid sensorId)
+            => $"Sensor {sensorId.ToString()} was successfully added";
+
         public static string SuccessfullyInitAllSensors
-            => "All default sensors are initizlized";
+            => "All default sensors are initialized";
 
         public static string StartedSendingSensorData(Guid sensorId)
-            => $"Started sending sensor {sensorId} data";
+            => $"Started sending data to sensor {sensorId}";
 
         public static string StoppedSendingSensorData(Guid sensorId)
-            => $"Stopped sending sensor {sensorId} data";
+            => $"Stopped sending data to sensor {sensorId}";
 
         public static string SuccessfullyChangedGenerator(Guid sensorId, GenMethodTypeEnum generatorType)
-            => $"Sensor {sensorId.ToString()} change generator method to - {Enum.GetName(typeof(GenMethodTypeEnum), generatorType)}";
+            => $"Sensor {sensorId.ToString()} has changed generator method to - {Enum.GetName(typeof(GenMethodTypeEnum), generatorType)}";
 
         public static string SuccessfullyChangedGeneratorAllSensors(GenMethodTypeEnum generatorType)
-            => $"All sensors changed generator method to - {Enum.GetName(typeof(GenMethodTypeEnum), generatorType)}";
+            => $"All sensors have changed their generator method to - {Enum.GetName(typeof(GenMethodTypeEnum), generatorType)}";
         #endregion
 
 
@@ -49,7 +52,7 @@
         #endregion
 
         // Shutdown
-        public static string AllSystemShutdown()
-            => $"All systems shuted down";
+        public static string AllSystemsShutdown()
+            => $"All systems shutdown";
     }
 }

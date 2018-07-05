@@ -32,33 +32,34 @@
 
         public void ExecuteCommand(string[] cmdArgs)
         {
-            string command = cmdArgs[0];
+            string command = cmdArgs.FirstOrDefault()?.ToUpper();
 
+            // TODO: Add regex validations for the commands
             switch(command)
             {
-                case "Start":
+                case "START":
                     // {Cmd} {SensorId}
                     this.outputMsg = this.sensorManager.Start(cmdArgs[1]);
                     break;
-                case "Stop":
+                case "STOP":
                     // {Cmd} {SensorId}
                     this.outputMsg = this.sensorManager.Stop(cmdArgs[1]);
                     break;
-                case "Sensor-Data":
+                case "SENSOR-DATA":
                     // {Cmd} {SensorId} {StartRange} {EndRange} {Interval (seconds)}
                     this.outputMsg = this.sensorManager.AddSensorInputData(cmdArgs.Skip(1).ToArray());
                     break;
-                case "Gen-Conf":
+                case "GEN-CONF":
                     // {Cmd} {Method} {SensorId}
                     // Methods - {Random: 1}, {Sin: 2}, {Cos: 3}
                     this.outputMsg = this.sensorManager.ChangeGeneratorSensor(cmdArgs[1], cmdArgs[2]);
                     break;
-                case "Gen-Conf-All":
+                case "GEN-CONF-ALL":
                     // {Cmd} {Method}
                     // Methods - {Random: 1}, {Sin: 2}, {Cos: 3}
                     this.outputMsg = this.sensorManager.ChangeGeneratorAllSensors(cmdArgs[1]);
                     break;
-                case "Shutdown":
+                case "SHUTDOWN":
                     this.outputMsg = this.sensorManager.Shutdown();
                     this.isRunning = false;
                     break;
