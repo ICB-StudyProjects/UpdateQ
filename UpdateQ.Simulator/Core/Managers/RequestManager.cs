@@ -4,41 +4,42 @@
     using System.Net.Http;
     using System.Net.Http.Headers;
     using System.Threading;
+    using System.Threading.Tasks;
     using UpdateQ.Simulator.Core.Interfaces;
     using UpdateQ.Simulator.Model;
 
     public class RequestManager : IRequestManager
     {
         private readonly HttpClient client;
-        private readonly ISensorManager sensorManager;
+        private IDataManager dataManager;
 
-        public RequestManager(ISensorManager sensorManager)
+        public RequestManager(IDataManager dataManager)
         {
-            this.sensorManager = sensorManager;
+            this.dataManager = dataManager;
             this.client = new HttpClient();
 
             this.SetHeaders();
         }
 
-        public void SendSensorHttpRequest(Guid sensorId, CancellationToken cToken)
+        public async void SendSensorHttpRequest(Guid sensorId, CancellationToken cToken)
         {
-            SensorDto sensorData = this.sensorManager.GetSensorData(sensorId);
+            SensorDto sensorData = this.dataManager.GenerateSensorData(sensorId);
 
-            //var jsonStrData = JsonConvert.SerializeObject(sensorData);
-            ////var jsonData = JObject.FromObject(product);
+            await this.client.PostAsJsonAsync("api/sensors", sensorData, cToken)
+                .ContinueWith(t => TaskContinuationOptions.NotOnCanceled);
 
-            //HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "api/values");
-            //request.Content = new StringContent(jsonStrData, Encoding.UTF8, "application/json");
+            if (!cToken.IsCancellationRequested)
+            {
+                Console.WriteLine($"Data - {sensorData.CurrentData} - was send from sensor {sensorId}");
+            }
 
-            //this.client.SendAsync(request);
-
-            // Sending Post HTTP Request with CancellationTokens
-            this.client.PostAsJsonAsync("api/products", sensorData, cToken);
+            return;
         }
 
         private void SetHeaders()
         {
-            this.client.BaseAddress = new Uri("http://localhost:64195/");
+            // TODO: Test with the API port then change it to the Hub's port
+            this.client.BaseAddress = new Uri("http://localhost:40004/");
             this.client.DefaultRequestHeaders.Accept.Clear();
             this.client.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
