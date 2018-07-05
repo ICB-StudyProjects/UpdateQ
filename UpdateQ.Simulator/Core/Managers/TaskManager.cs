@@ -5,6 +5,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using UpdateQ.Simulator.Core.Interfaces;
+    using UpdateQ.Simulator.Model;
 
     public class TaskManager : ITaskManager
     {
@@ -17,20 +18,24 @@
             this.cTokenDict = new Dictionary<Guid, CancellationTokenSource>();
         }
 
-        public void StartSendindSensorData(Guid sensorId, TimeSpan timeout)
+        public async void StartSendindSensorData(SensorMapInfo sensor)
         {
-            // Create CancellationTokenSource
             var cTokenSource = new CancellationTokenSource();
 
             var cToken = cTokenSource.Token;
 
-            cToken.Register(() => CancelNotification(sensorId));
+            cToken.Register(() => CancelNotification(sensor.SensorId));
+
+            // Add the KVP to track the token
+            this.cTokenDict.Add(sensor.SensorId, cTokenSource);
 
             try
             {
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                this.SetTaskInterval(sensorId, timeout, cToken);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+                await this.SetTaskInterval(sensor, cToken);
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine($"Your submission was canceled");
             }
             catch (AggregateException ae)
             {
@@ -47,51 +52,55 @@
             {
                 cTokenSource.Dispose();
             }
-            
-            // Add the KVP to track the token
-            this.cTokenDict.Add(sensorId, cTokenSource);
         }
 
         public void StopSendindSensorData(Guid sensorId)
         {
-            var cToken = this.cTokenDict[sensorId];
+            var cTokenSource = this.cTokenDict[sensorId];
 
-            cToken.Cancel();
-            cToken.Dispose();
+            this.CancelAndRemoveToken(cTokenSource);
 
             this.cTokenDict.Remove(sensorId);
         }
 
         public void StopSendindAllSensorData()
         {
-            // TODO: Add all cTokens to collection and cancel them simultaneously then clear the dict
-            // this.cTokenDict.Clear();
-            throw new NotImplementedException();
+            foreach (var kvp in this.cTokenDict)
+            {
+                var cTokenSource = kvp.Value;
+
+                this.CancelAndRemoveToken(cTokenSource);
+            }
+
+            this.cTokenDict.Clear();
         }
 
-        private async Task SetTaskInterval(Guid sensorId, TimeSpan timeout, CancellationToken cToken)
+        private async Task SetTaskInterval(SensorMapInfo sensor, CancellationToken cToken)
         {
             if (cToken.IsCancellationRequested)
             {
-                return;
+                cToken.ThrowIfCancellationRequested();
             }
 
             // returning the Main Thread moving it to the ThreadPool
-            await Task.Delay(timeout).ConfigureAwait(false);
+            await Task.Delay(sensor.Interval).ConfigureAwait(false);
 
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
             // Send http request with Cancellation Token
-            this.requestManager.SendSensorHttpRequest(sensorId, cToken);
+            this.requestManager.SendSensorHttpRequest(sensor.SensorId, cToken);
 
             // Recursion!!!
-            this.SetTaskInterval(sensorId, timeout, cToken);
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            await this.SetTaskInterval(sensor, cToken);
+        }
+
+        private void CancelAndRemoveToken(CancellationTokenSource cTokenSource)
+        {
+            cTokenSource.Cancel();
+            cTokenSource.Dispose();
         }
 
         private static void CancelNotification(Guid sensorId)
         {
-            // TODO: Remove this method if the main operation stays in the sensorManager
-            Console.WriteLine($"The request task for sensor {sensorId} was canceled");
+            Console.WriteLine($"Cancelling your requests to sensor {sensorId}");
         }
     }
 }

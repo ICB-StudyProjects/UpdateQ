@@ -13,23 +13,23 @@
     public class SensorManager : ISensorManager
     {
         private string resultMsg;
-        private ICollection<SensorMapInfo> sensorsData;
+        private ICollection<SensorMapInfo> sensors;
         private readonly ITaskManager taskManager;
-        private Random randomGen;
 
         public SensorManager(ITaskManager taskManager)
         {
             this.taskManager = taskManager;
-            this.sensorsData = new HashSet<SensorMapInfo>();
-            this.randomGen = new Random();
+            this.sensors = new HashSet<SensorMapInfo>();
         }
+
+        public IEnumerable<SensorMapInfo> Sensors => this.sensors;
 
         public async Task<string> RegisterSensors()
         {
             using (StreamReader sr = new StreamReader(Constants.APPSETTING_FULL_PATH))
             {
                 string file = await sr.ReadToEndAsync();
-                this.sensorsData = JsonConvert.DeserializeObject<ContainerSensorsModel>(file).Sensors;
+                this.sensors = JsonConvert.DeserializeObject<ContainerSensorsModel>(file).Sensors;
             }
 
             return Operations.SuccessfullyInitAllSensors;
@@ -37,20 +37,26 @@
 
         public string AddSensorInputData(IList<string> arguments)
         {
-            Guid sensorId = Guid.Parse(arguments[1]);
-            int startRange = int.Parse(arguments[2]);
-            int endRange = int.Parse(arguments[3]);
-            TimeSpan interval = TimeSpan.FromSeconds(double.Parse(arguments[4]));
+            Guid sensorId = Guid.Parse(arguments[0]);
+            int startRange = int.Parse(arguments[1]);
+            int endRange = int.Parse(arguments[2]);
+            TimeSpan interval = TimeSpan.FromSeconds(double.Parse(arguments[3]));
 
-            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
+            SensorMapInfo sensor = this.sensors.FirstOrDefault(s => s.SensorId == sensorId);
 
             if (sensor == null)
             {
-                this.resultMsg = Operations.SensorNotRegistered(sensorId);
+                SensorMapInfo newSensor = new SensorMapInfo(sensorId, startRange, endRange, interval);
+
+                this.sensors.Add(newSensor);
+
+                this.resultMsg = Operations.SuccessfullyAddedSensor(sensorId);
             }
             else
             {
-                sensor = new SensorMapInfo(sensorId, startRange, endRange, interval);
+                sensor.StartRange = startRange;
+                sensor.EndRange = endRange;
+                sensor.Interval = interval;
 
                 this.resultMsg = Operations.SuccessfullyChangedSensorData(sensorId);
             }
@@ -62,7 +68,7 @@
         {
             Guid sensorId = Guid.Parse(sensorIdStr);
 
-            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
+            SensorMapInfo sensor = this.sensors.FirstOrDefault(s => s.SensorId == sensorId);
 
             if (sensor == null)
             {
@@ -74,7 +80,7 @@
             }
             else
             {
-                this.taskManager.StartSendindSensorData(sensor.SensorId, sensor.Interval);
+                this.taskManager.StartSendindSensorData(sensor);
 
                 sensor.IsActive = true;
 
@@ -88,7 +94,7 @@
         {
             Guid sensorId = Guid.Parse(sensorIdStr);
 
-            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
+            SensorMapInfo sensor = this.sensors.FirstOrDefault(s => s.SensorId == sensorId);
 
             if (sensor == null)
             {
@@ -112,15 +118,16 @@
 
         public string Shutdown()
         {
-            // TODO: Stop sending data to ALL sensors through http requester (class)
-            throw new NotImplementedException();
+            this.taskManager.StopSendindAllSensorData();
+
+            return Operations.AllSystemsShutdown();
         }
 
         public string ChangeGeneratorSensor(string methodTypeStr, string sensorIdStr)
         {
             Guid sensorId = Guid.Parse(sensorIdStr);
 
-            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
+            SensorMapInfo sensor = this.sensors.FirstOrDefault(s => s.SensorId == sensorId);
 
             if (sensor == null)
             {
@@ -151,7 +158,7 @@
             {
                 var methodType = (GenMethodTypeEnum) Enum.Parse(typeof(GenMethodTypeEnum), methodTypeStr);
 
-                foreach (var sensor in this.sensorsData)
+                foreach (var sensor in this.sensors)
                 {
                     sensor.TypeGenerator = methodType;
                 }
@@ -164,41 +171,6 @@
             }
 
             return this.resultMsg;
-        }
-
-        public SensorDto GetSensorData(Guid sensorId)
-        {
-            SensorMapInfo sensor = this.sensorsData.FirstOrDefault(s => s.SensorId == sensorId);
-
-            var randomSensorData = CreateRandomSensorData(sensor.StartRange, sensor.EndRange, sensor.TypeGenerator);
-
-            SensorDto sensorDataObg = new SensorDto
-            {
-                SensorId = sensor.SensorId,
-                CurrentData = randomSensorData
-            };
-
-            return sensorDataObg;
-        }
-
-        private int CreateRandomSensorData(int startRange, int endRange, GenMethodTypeEnum typeGenerator)
-        {
-            int randomSensorData = 0;
-
-            switch (typeGenerator)
-            {
-                case GenMethodTypeEnum.Random:
-                    randomSensorData = randomGen.Next(startRange, endRange);
-                    break;
-                case GenMethodTypeEnum.Sin:
-                    // Sin
-                    break;
-                case GenMethodTypeEnum.Cos:
-                    // Random
-                    break;
-            }
-
-            return randomSensorData;
         }
     }
 }

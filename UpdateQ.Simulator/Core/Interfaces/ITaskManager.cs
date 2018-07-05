@@ -1,10 +1,11 @@
 ﻿namespace UpdateQ.Simulator.Core.Interfaces
 {
     using System;
+    using UpdateQ.Simulator.Model;
 
     public interface ITaskManager
     {
-        void StartSendindSensorData(Guid sensorId, TimeSpan timeout);
+        void StartSendindSensorData(SensorMapInfo sensor);
         void StopSendindSensorData(Guid sensorId);
         void StopSendindAllSensorData();
     }
