@@ -24,10 +24,15 @@
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<RequestManager>().As<IRequestManager>();
-            builder.RegisterType<SensorManager>().As<ISensorManager>();
-            builder.RegisterType<TaskManager>().As<ITaskManager>();
-            builder.RegisterType<Engine>().As<IEngine>();
+            builder.RegisterType<SensorManager>().As<ISensorManager>().SingleInstance();
+            builder.RegisterType<TaskManager>().As<ITaskManager>().SingleInstance();
+            builder.RegisterType<RequestManager>().As<IRequestManager>().SingleInstance();
+
+            builder.RegisterType<DataManager>().As<IDataManager>()
+                .InstancePerLifetimeScope()
+                .PropertiesAutowired(PropertyWiringOptions.AllowCircularDependencies);
+
+            builder.RegisterType<Engine>().As<IEngine>().SingleInstance();
 
             Container = builder.Build();
         }
