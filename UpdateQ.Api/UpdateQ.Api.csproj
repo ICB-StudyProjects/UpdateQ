@@ -28,6 +28,7 @@
     <ProjectReference Include="..\UpdateQ.Data\UpdateQ.Data.csproj" />
     <ProjectReference Include="..\UpdateQ.Model\UpdateQ.Model.csproj" />
     <ProjectReference Include="..\UpdateQ.Service\UpdateQ.Service.csproj" />
+    <ProjectReference Include="..\UpdateQ.Simulator\UpdateQ.Simulator.csproj" />
   </ItemGroup>
 
   <ItemGroup>
