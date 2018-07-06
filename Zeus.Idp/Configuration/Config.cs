@@ -45,7 +45,6 @@
                 {
                     ClientId = "updateq_implicit",
                     ClientName = "UpdateQ Client",
-                    //ClientSecrets = new [] { new Secret("$3cr37".Sha256()) },
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowedScopes = new []
                     {

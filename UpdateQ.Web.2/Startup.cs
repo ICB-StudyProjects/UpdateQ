@@ -29,7 +29,6 @@ namespace UpdateQ.Web._2
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    // TODO: Change to more secure one
                     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
             });

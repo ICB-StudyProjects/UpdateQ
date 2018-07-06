@@ -36,8 +36,7 @@
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    // TODO: Change to more secure one
-                    builder.WithOrigins("http://localhost:4200", "http://localhost:49342")
+                    builder.WithOrigins("http://localhost:4200", "http://localhost:49342", "http://localhost:56095")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
@@ -59,7 +58,7 @@
                 .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = "http://localhost:52351/";
-                    options.RequireHttpsMetadata = false; // TODO: Change to {true} if in production
+                    options.RequireHttpsMetadata = false; // Change to {true} if in production
                     options.ApiName = "updateq";
                 });
 
