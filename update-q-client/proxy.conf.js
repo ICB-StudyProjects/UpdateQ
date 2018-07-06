@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:50523'
+const API_URL = 'http://localhost:40004'
 
 const PROXY_CONFIG = [
   {

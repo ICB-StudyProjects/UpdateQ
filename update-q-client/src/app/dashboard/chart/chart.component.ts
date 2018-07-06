@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartComponent implements OnInit {
   public data: any;
+
   constructor() {
     this.data = {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],

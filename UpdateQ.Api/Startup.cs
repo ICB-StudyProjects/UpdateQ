@@ -51,7 +51,7 @@
                 .AddJsonOptions(option =>
                 {
                     option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                    option.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
+                    // option.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.All;
                 });
 
             services

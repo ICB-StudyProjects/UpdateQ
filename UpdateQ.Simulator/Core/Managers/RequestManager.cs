@@ -38,8 +38,7 @@
 
         private void SetHeaders()
         {
-            // TODO: Test with the API port then change it to the Hub's port
-            this.client.BaseAddress = new Uri("http://localhost:40004/");
+            this.client.BaseAddress = new Uri("http://localhost:50456/");
             this.client.DefaultRequestHeaders.Accept.Clear();
             this.client.DefaultRequestHeaders.Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
