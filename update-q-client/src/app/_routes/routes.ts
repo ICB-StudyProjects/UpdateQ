@@ -8,8 +8,8 @@ import { ChartContainer } from "../dashboard/chart/chart.container";
 
 export const ROUTES: Routes = [
     { path: '', component: HomePageComponent },
-    { path: 'dashboard', component: ChartContainer },
+    { path: 'dashboard/:id', component: ChartContainer },
     { path: 'node/create', component: InfoNodeCreateComponent },
-    { path: 'node/edit', component: InfoNodeEditComponent },
-    { path: 'node/delete', component: InfoNodeDeleteComponent }
+    { path: 'node/edit/:id', component: InfoNodeEditComponent },
+    { path: 'node/delete/:id', component: InfoNodeDeleteComponent }
 ]
