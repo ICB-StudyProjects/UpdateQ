@@ -12,6 +12,7 @@ import { HeaderComponent } from './template/header/header.component';
 import { InfoNodeModule } from './infonodes/info-nodes.module';
 import { RoutesModule } from './_routes/routes.module';
 import { OpenIdConnectService } from './_core/open-id-connect.service';
+import { SignalRService } from './_core/signalr.service';
 // import { OpenIdConnectService } from './_core/open-id-connect.service';
 
 @NgModule({
@@ -32,7 +33,8 @@ import { OpenIdConnectService } from './_core/open-id-connect.service';
   ],
   providers: [
     Configuration,
-    OpenIdConnectService
+    OpenIdConnectService,
+    SignalRService
   ],
   bootstrap: [AppComponent]
 })

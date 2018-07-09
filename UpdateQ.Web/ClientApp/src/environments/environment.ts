@@ -8,7 +8,7 @@ export const environment = {
   openIdConnectSettings: {
     authority: 'http://localhost:52351/',
     client_id: 'updateq_implicit',
-    redirect_uri: 'http://localhost:4200/signin-oidc',
+    redirect_uri: 'http://localhost:56095/signin-oidc',
     scope: 'openid profile email address phone',
     response_type: 'id_token'
   }

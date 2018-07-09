@@ -12,8 +12,8 @@ export const ROUTES: Routes = [
   { path: 'dashboard/:id', component: ChartContainer },
   { path: 'bla', component: BlaComponent },
   { path: 'node/create', component: InfoNodeCreateComponent },
-  { path: 'node/edit/:id', component: InfoNodeEditComponent },
-  { path: 'node/delete/:id', component: InfoNodeDeleteComponent },
+  { path: 'node/edit', component: InfoNodeEditComponent },
+  { path: 'node/delete', component: InfoNodeDeleteComponent },
   { path: 'signin-oidc', component: SigninOidcComponent },
   { path: '', component: HomePageComponent, pathMatch: 'full' }
 ];

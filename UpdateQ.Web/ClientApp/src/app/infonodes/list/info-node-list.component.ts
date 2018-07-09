@@ -116,11 +116,14 @@ export class InfoNodeListComponent implements OnInit {
 
         if (item.expanded) {
             item.icon = 'fa fa-star';
+
+            this.router.navigate(['/dashboard', tsNode.sensorId]);
         } else {
             item.icon = 'fa fa-star-o';
+
+            this.router.navigate(['/']);
         }
 
-        this.router.navigate(['/dashboard', tsNode.sensorId]);
 
         console.log(tsNode.sensorId);
     }

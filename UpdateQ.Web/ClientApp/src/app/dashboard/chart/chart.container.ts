@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SignalRService } from '../../_core/signalr.service';
 
 @Component({
   selector: 'app-chart-container',
@@ -6,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
         <app-chart></app-chart>
     `
 })
-export class ChartContainer implements OnInit {
-  constructor() {}
+export class ChartContainer implements OnInit, OnDestroy {
+  constructor(private signalRService: SignalRService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.signalRService.startsListeningForSensorData();
+  }
+
+  ngOnDestroy(): void {
+    this.signalRService.stopListeningForSensorData();
+  }
 }

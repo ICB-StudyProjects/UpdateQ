@@ -11,6 +11,7 @@ import { ChartContainer } from '../dashboard/chart/chart.container';
 import { SigninOidcComponent } from '../shared/signin-oidc.component';
 import { OpenIdConnectService } from '../_core/open-id-connect.service';
 import { BlaComponent } from '../dashboard/bla/bla.component';
+import { SignalRService } from '../_core/signalr.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BlaComponent } from '../dashboard/bla/bla.component';
   ],
   providers: [
     OpenIdConnectService,
-    RouteGuardService
+    RouteGuardService,
+    SignalRService
   ],
   exports: [ RouterModule ]
 })

@@ -24,39 +24,39 @@
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.WithOrigins("http://localhost:40004", "http://localhost:52351")
+                    builder.WithOrigins("http://localhost:40004", "http://localhost:52351", "http://localhost:50456")
                     .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
                 });
             });
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = "Cookies";
-                options.DefaultChallengeScheme = "oidc";
-            })
-            .AddCookie("Cookies")
-            .AddOpenIdConnect("oidc", options =>
-            {
-                options.SignInScheme = "Cookies";
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = "Cookies";
+            //    options.DefaultChallengeScheme = "oidc";
+            //})
+            //.AddCookie("Cookies")
+            //.AddOpenIdConnect("oidc", options =>
+            //{
+            //    options.SignInScheme = "Cookies";
 
-                options.Authority = "http://localhost:5000";
-                options.RequireHttpsMetadata = false;
+            //    options.Authority = "http://localhost:5000";
+            //    options.RequireHttpsMetadata = false;
 
-                options.ClientId = "updateq_implicit";
-                options.ResponseType = "id_token";
+            //    options.ClientId = "updateq_implicit";
+            //    options.ResponseType = "id_token";
 
-                options.Scope.Add("updateq");
-                options.GetClaimsFromUserInfoEndpoint = true;
+            //    options.Scope.Add("updateq");
+            //    options.GetClaimsFromUserInfoEndpoint = true;
 
-                // Additional user scopes
-                options.Scope.Add("email");
-                options.Scope.Add("phone");
-                options.Scope.Add("address");
+            //    // Additional user scopes
+            //    options.Scope.Add("email");
+            //    options.Scope.Add("phone");
+            //    options.Scope.Add("address");
 
-                options.SaveTokens = true;
-            });
+            //    options.SaveTokens = true;
+            //});
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -82,6 +82,8 @@
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            //app.UseAuthentication();
 
             // app.UseHttpsRedirection();
             app.UseMvc();
