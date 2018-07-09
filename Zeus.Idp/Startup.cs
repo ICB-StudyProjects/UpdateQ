@@ -20,30 +20,41 @@ namespace Zeus.Idp
         {
             services
                 .AddIdentityServer()
-                .AddSigningCredential(new X509Certificate2(Directory.GetCurrentDirectory() + @"\Certificates\updateq.pfx", "update"))
+                .AddDeveloperSigningCredential()
+                //.AddSigningCredential(new X509Certificate2(Directory.GetCurrentDirectory() + @"\Certificates\updateq.pfx", "update"))
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryClients(Config.Clients())
                 .AddTestUsers(Config.Users());
-            
-                //.AddConfigurationStore(options =>
-                //{
-                //    options.ConfigureDbContext = builder =>
-                //        builder.UseSqlServer(authDbConnectionString,
-                //            sql => sql.MigrationsAssembly(assembly));
-                //})
-                //// this adds the operational data from DB (codes, tokens, consents)
-                //.AddOperationalStore(options =>
-                //{
-                //    options.ConfigureDbContext = builder =>
-                //        builder.UseSqlServer(authDbConnectionString,
-                //            sql => sql.MigrationsAssembly(assembly));
 
-                //    // this enables automatic token cleanup. this is optional.
-                //    //options.EnableTokenCleanup = true;
-                //    //options.TokenCleanupInterval = 30;
-                //});
-            
+            //.AddConfigurationStore(options =>
+            //{
+            //    options.ConfigureDbContext = builder =>
+            //        builder.UseSqlServer(authDbConnectionString,
+            //            sql => sql.MigrationsAssembly(assembly));
+            //})
+            //// this adds the operational data from DB (codes, tokens, consents)
+            //.AddOperationalStore(options =>
+            //{
+            //    options.ConfigureDbContext = builder =>
+            //        builder.UseSqlServer(authDbConnectionString,
+            //            sql => sql.MigrationsAssembly(assembly));
+
+            //    // this enables automatic token cleanup. this is optional.
+            //    //options.EnableTokenCleanup = true;
+            //    //options.TokenCleanupInterval = 30;
+            //});
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200", "http://localhost:49342", "http://localhost:56095")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
+
             services.AddMvc();
         }
 
@@ -54,6 +65,8 @@ namespace Zeus.Idp
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowAll");
 
             app.UseIdentityServer();
 

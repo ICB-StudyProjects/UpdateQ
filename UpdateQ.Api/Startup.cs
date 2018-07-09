@@ -97,7 +97,7 @@
             app.UseAuthentication();
 
             // For TLS
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
             //AutoMapperConfiguration.Initialize(); // Need to be used instead of the Mapper class
             AutoMapperConf.RegisterMappings();

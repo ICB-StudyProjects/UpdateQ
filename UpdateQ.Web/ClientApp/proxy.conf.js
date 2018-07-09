@@ -1,4 +1,5 @@
 const API_URL = 'http://localhost:40004'
+const IDP_URL = 'http://localhost:52351'
 
 const PROXY_CONFIG = [
   {
@@ -6,6 +7,13 @@ const PROXY_CONFIG = [
       '/api/*'
     ],
     target: API_URL,
+    secure: false
+  },
+  {
+    context: [
+      '/*'
+    ],
+    target: IDP_URL,
     secure: false
   }
 ]

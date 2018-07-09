@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:40004'
+const API_URL = 'https://localhost:40004'
 
 const PROXY_CONFIG = [
   {
@@ -6,7 +6,7 @@ const PROXY_CONFIG = [
       '/api/*'
     ],
     target: API_URL,
-    secure: false
+    secure: true
   }
 ]
 

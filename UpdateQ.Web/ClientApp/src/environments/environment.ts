@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiServer: 'https://localhost:44323/',
+  openIdConnectSettings: {
+    authority: 'http://localhost:52351/',
+    client_id: 'updateq_implicit',
+    redirect_uri: 'http://localhost:4200/signin-oidc',
+    scope: 'openid profile email address phone',
+    response_type: 'id_token'
+  }
 };
 
 /*

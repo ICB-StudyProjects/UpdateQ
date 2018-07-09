@@ -11,6 +11,8 @@ import { FooterComponent } from './template/footer/footer.component';
 import { HeaderComponent } from './template/header/header.component';
 import { InfoNodeModule } from './infonodes/info-nodes.module';
 import { RoutesModule } from './_routes/routes.module';
+import { OpenIdConnectService } from './_core/open-id-connect.service';
+// import { OpenIdConnectService } from './_core/open-id-connect.service';
 
 @NgModule({
   declarations: [
@@ -24,12 +26,13 @@ import { RoutesModule } from './_routes/routes.module';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    RoutesModule,
     // App Modules
-    InfoNodeModule
+    InfoNodeModule,
+    RoutesModule
   ],
   providers: [
-    Configuration
+    Configuration,
+    OpenIdConnectService
   ],
   bootstrap: [AppComponent]
 })

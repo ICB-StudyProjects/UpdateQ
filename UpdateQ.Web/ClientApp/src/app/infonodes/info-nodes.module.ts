@@ -2,18 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SlideMenuModule,
-   PanelMenuModule, 
-   CheckboxModule,
-   RadioButtonModule,
-   ButtonModule} from 'primeng/primeng';
-
+import {
+  SlideMenuModule,
+  PanelMenuModule,
+  CheckboxModule,
+  RadioButtonModule,
+  ButtonModule
+} from 'primeng/primeng';
 
 import { InfoNodeCreateComponent } from './create/info-node-create.component';
 import { InfoNodeDeleteComponent } from './delete/info-node-delete.component';
 import { InfoNodeEditComponent } from './edit/info-node-edit.component';
 import { InfoNodeListComponent } from './list/info-node-list.component';
-import { infoNodesService } from './info-nodes.service';
+import { InfoNodesService } from './info-nodes.service';
 
 @NgModule({
   imports: [
@@ -21,7 +22,11 @@ import { infoNodesService } from './info-nodes.service';
     RouterModule,
     FormsModule,
     // PrimeNg Modules
-    SlideMenuModule, PanelMenuModule, CheckboxModule, RadioButtonModule, ButtonModule
+    SlideMenuModule,
+    PanelMenuModule,
+    CheckboxModule,
+    RadioButtonModule,
+    ButtonModule
   ],
   declarations: [
     InfoNodeListComponent,
@@ -29,9 +34,7 @@ import { infoNodesService } from './info-nodes.service';
     InfoNodeEditComponent,
     InfoNodeDeleteComponent
   ],
-  providers: [
-    infoNodesService
-  ],
+  providers: [InfoNodesService],
   exports: [
     InfoNodeListComponent,
     InfoNodeCreateComponent,
@@ -39,4 +42,4 @@ import { infoNodesService } from './info-nodes.service';
     InfoNodeDeleteComponent
   ]
 })
-export class InfoNodeModule { }
+export class InfoNodeModule {}

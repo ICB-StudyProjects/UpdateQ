@@ -24,7 +24,8 @@
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.WithOrigins("http://localhost:40004").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                    builder.WithOrigins("http://localhost:40004", "http://localhost:52351")
+                    .AllowAnyMethod().AllowAnyHeader().AllowCredentials();
                 });
             });
 
