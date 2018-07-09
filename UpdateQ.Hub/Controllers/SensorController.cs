@@ -25,8 +25,7 @@
                 return BadRequest();
             }
 
-            this.sensorHubContext.Clients.All.SendAsync("ReceiveSensorData",
-                $"Sensor: {sensor.SensorId.ToString()}; Sends: {sensor.CurrentData} data package");
+            this.sensorHubContext.Clients.All.SendAsync("ReceiveSensorData", sensor);
 
             return Ok();
         }

@@ -32,7 +32,7 @@ namespace UpdateQ.Hub
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200")
+                    builder.WithOrigins("http://localhost:4200", "http://localhost:56095")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
