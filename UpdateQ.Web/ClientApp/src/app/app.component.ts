@@ -24,12 +24,12 @@ export class AppComponent implements OnInit {
     this.signalRService.registerHub();
 
     // OpenId Connect
-    const path = window.location.pathname;
+    //const path = window.location.pathname;
 
-    if (path !== '/signin-oidc') {
-     if (!this.openIdConnectService.userAvailable) {
-       this.openIdConnectService.triggerSignIn();
-     }
-    }
+    // if (path !== '/signin-oidc') {
+    //  if (!this.openIdConnectService.userAvailable) {
+    //    this.openIdConnectService.triggerSignIn();
+    //  }
+    // }
   }
 }

@@ -1,34 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { SensorDto } from '../../infonodes/models/sensor-dto.model';
+import { UIChart } from 'primeng/primeng';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
-  public data: any;
+export class ChartComponent {
+  @ViewChild("sensorChart") sensorChart: UIChart;
 
-  constructor() {
-    this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-          {
-              label: 'My First dataset',
-              backgroundColor: '#42A5F5',
-              borderColor: '#1E88E5',
-              data: [65, 59, 80, 81, 56, 55, 40]
-          },
-          {
-              label: 'My Second dataset',
-              backgroundColor: '#9CCC65',
-              borderColor: '#7CB342',
-              data: [28, 48, 40, 19, 86, 27, 90]
-          }
-      ]
-    };
-   }
+  private data: any = {
+    labels: [],
+    datasets: []
+  };
 
-  ngOnInit() {
-    //
+  private sensorDataSet: any = {
+    label: '',
+    fill: false,
+    borderColor: '#1E88E5',
+    data: []
+  };
+
+  constructor(private route: ActivatedRoute) {
+    const sensorId = route.snapshot.params['id'];
+
+    this.sensorDataSet.label = `Sensor ${sensorId}`;
+
+    this.data.datasets.push(this.sensorDataSet);
+  }
+
+  updateChart(sensorData: number) {
+    // TODO: Get the date from the DTO
+    const dateTimeNow = new Date().toLocaleTimeString();
+
+    if (this.data.labels.length >= 10) {
+      this.data.labels.shift();
+      this.sensorDataSet.data.shift();
+    }
+    
+    this.data.labels.push(dateTimeNow);
+    this.sensorDataSet.data.push(sensorData);
+
+    this.sensorChart.refresh();
   }
 }
